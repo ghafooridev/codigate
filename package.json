@@ -1,22 +1,45 @@
 {
-  "name": "@org/source",
+  "name": "@codigate/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx run-many -t build --watch",
+    "build": "nx run-many -t build",
+    "build:server": "nx build mcp-server",
+    "start": "node dist/apps/mcp-server/main.js",
+    "serve": "nx serve mcp-server",
+    "graph": "nx graph",
+    "lint": "nx run-many -t lint",
+    "format": "nx format:write",
+    "format:check": "nx format:check",
+    "test": "nx run-many -t test",
+    "clean": "rm -rf dist node_modules/.cache"
+  },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@nx/esbuild": "23.1.0",
+    "@nx/eslint": "23.1.0",
+    "@nx/eslint-plugin": "23.1.0",
     "@nx/js": "23.1.0",
+    "@nx/node": "^23.1.0",
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.8",
     "@swc/helpers": "0.5.18",
     "@types/node": "^24.0.0",
+    "esbuild": "^0.27.0",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^10.0.0",
+    "jsonc-eslint-parser": "^2.1.0",
     "nx": "23.1.0",
     "prettier": "^3.8.1",
     "tslib": "^2.3.0",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.58.0"
   },
   "workspaces": [
-    "packages/*"
-  ]
+    "packages/*",
+    "apps/*"
+  ],
+  "dependencies": {}
 }

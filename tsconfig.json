@@ -2,6 +2,25 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": [],
+  "references": [
+    {
+      "path": "./apps/mcp-server"
+    },
+    {
+      "path": "./apps/vscode-extension"
+    },
+    {
+      "path": "./packages/domain"
+    },
+    {
+      "path": "./packages/application"
+    },
+    {
+      "path": "./packages/core"
+    },
+    {
+      "path": "./packages/shared"
+    }
+  ],
   "compilerOptions": {}
 }
