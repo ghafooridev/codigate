@@ -1,14 +1,8 @@
-import { ToolRegistry } from '@codigate/core';
-import { Tool } from '@codigate/domain';
+import { registerToolUseCase } from "./composition/container"
 
 
-const registry = new ToolRegistry();
-
-const tool = new Tool(
+registerToolUseCase.execute(
     'count-character',
     'Count characters of text'
 );
 
-registry.register(tool);
-
-console.log(registry.getTools());

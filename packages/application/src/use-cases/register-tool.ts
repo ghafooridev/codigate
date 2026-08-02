@@ -1,9 +1,9 @@
 import { Tool } from '@codigate/domain';
-import { ToolRegistry } from '@codigate/core';
+import { ToolRepository } from '../ports/tool-repository';
 
 export class RegisterToolUseCase {
     constructor(
-        private readonly registry: ToolRegistry
+        private readonly registry: ToolRepository
     ) { }
 
     execute(
