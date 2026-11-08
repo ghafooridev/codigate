@@ -1,8 +1,10 @@
-import { registerToolUseCase } from "./composition/container"
+import { serveStdio } from '@modelcontextprotocol/server/stdio';
+import { createServer } from './server';
 
+void serveStdio(createServer, {
+    onerror: (error) => {
+        console.error(error);
+    },
+});
 
-registerToolUseCase.execute(
-    'count-character',
-    'Count characters of text'
-);
-
+console.error('Codigate MCP server running on stdio');

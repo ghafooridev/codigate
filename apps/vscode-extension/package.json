@@ -1,32 +1,96 @@
 {
   "name": "@codigate/vscode-extension",
+  "displayName": "Codigate",
+  "description": "Codigate analysis, scores, and inline findings",
   "version": "0.0.1",
   "private": true,
+  "publisher": "codigate",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": ["Linters"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/main.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codigate.scan",
+        "title": "Codigate: Scan Workspace"
+      },
+      {
+        "command": "codigate.analyze",
+        "title": "Codigate: Analyze"
+      },
+      {
+        "command": "codigate.openPanel",
+        "title": "Codigate: Open Panel"
+      },
+      {
+        "command": "codigate.fix",
+        "title": "Codigate: Fix Finding"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codigate",
+          "title": "Codigate",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "codigate": [
+        {
+          "id": "codigate.scores",
+          "name": "Project Score"
+        },
+        {
+          "id": "codigate.findings",
+          "name": "Findings"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Codigate",
+      "properties": {
+        "codigate.ai.apiBase": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI-compatible API base URL, including /v1. Example: https://example.com/v1"
+        },
+        "codigate.ai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Bearer token sent as Authorization for chat completions."
+        },
+        "codigate.ai.model": {
+          "type": "string",
+          "default": "",
+          "description": "Model name sent in the chat completions request."
+        }
+      }
+    }
+  },
   "nx": {
     "targets": {
       "build": {
         "executor": "@nx/esbuild:esbuild",
-        "outputs": [
-          "{options.outputPath}"
-        ],
+        "outputs": ["{options.outputPath}"],
         "defaultConfiguration": "production",
         "options": {
           "platform": "node",
           "outputPath": "apps/vscode-extension/dist",
-          "format": [
-            "cjs"
-          ],
-          "bundle": false,
+          "format": ["cjs"],
+          "bundle": true,
+          "external": ["vscode"],
           "main": "apps/vscode-extension/src/main.ts",
           "tsConfig": "apps/vscode-extension/tsconfig.app.json",
-          "assets": [
-            "apps/vscode-extension/src/assets"
-          ],
           "esbuildOptions": {
             "sourcemap": true,
-            "outExtension": {
-              ".js": ".js"
-            }
+            "outExtension": { ".js": ".js" }
           }
         },
         "configurations": {
@@ -34,68 +98,19 @@
           "production": {
             "esbuildOptions": {
               "sourcemap": false,
-              "outExtension": {
-                ".js": ".js"
-              }
+              "outExtension": { ".js": ".js" }
             }
-          }
-        }
-      },
-      "prune-lockfile": {
-        "dependsOn": [
-          "build"
-        ],
-        "cache": true,
-        "executor": "@nx/js:prune-lockfile",
-        "outputs": [
-          "{workspaceRoot}/apps/vscode-extension/dist/package.json",
-          "{workspaceRoot}/apps/vscode-extension/dist/package-lock.json"
-        ],
-        "options": {
-          "buildTarget": "build"
-        }
-      },
-      "copy-workspace-modules": {
-        "dependsOn": [
-          "build"
-        ],
-        "cache": true,
-        "outputs": [
-          "{workspaceRoot}/apps/vscode-extension/dist/workspace_modules"
-        ],
-        "executor": "@nx/js:copy-workspace-modules",
-        "options": {
-          "buildTarget": "build"
-        }
-      },
-      "prune": {
-        "dependsOn": [
-          "prune-lockfile",
-          "copy-workspace-modules"
-        ],
-        "executor": "nx:noop"
-      },
-      "serve": {
-        "continuous": true,
-        "executor": "@nx/js:node",
-        "defaultConfiguration": "development",
-        "dependsOn": [
-          "build"
-        ],
-        "options": {
-          "buildTarget": "@codigate/vscode-extension:build",
-          "runBuildTargetDependencies": false
-        },
-        "configurations": {
-          "development": {
-            "buildTarget": "@codigate/vscode-extension:build:development"
-          },
-          "production": {
-            "buildTarget": "@codigate/vscode-extension:build:production"
           }
         }
       }
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "@codigate/application": "*",
+    "@codigate/core": "*",
+    "@codigate/domain": "*"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0"
+  }
 }

@@ -1,5 +1,5 @@
 import { Tool } from '@codigate/domain';
-import { ToolRepository } from '../ports/tool-repository';
+import { ToolRepository } from '../ports';
 
 export class RegisterToolUseCase {
     constructor(

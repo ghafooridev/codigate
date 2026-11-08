@@ -1,0 +1,9 @@
+id: custom.no-direct-axios
+category: conventions
+severity: high
+title: Use ApiClient instead of Axios
+message: Direct Axios usage is not allowed; use ApiClient
+glob:
+  - "**/*.{ts,tsx,js,jsx}"
+pattern: "\\bfrom\\s+['\"]axios['\"]|\\baxios\\."
+suggestion: Route HTTP through ApiClient.

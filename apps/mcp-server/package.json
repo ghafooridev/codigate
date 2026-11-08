@@ -97,5 +97,10 @@
       }
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "@codigate/application": "*",
+    "@codigate/core": "*",
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.4.3"
+  }
 }

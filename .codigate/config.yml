@@ -1,0 +1,36 @@
+conventions:
+  architecture: Clean Architecture
+  naming:
+    components: PascalCase
+    functions: camelCase
+  react: Server Components by default
+  api: React Query only
+  state: Zustand only for client state
+  backend: Repository pattern
+  testing: Vitest
+  security: No secrets in source
+
+panel:
+  port: 4318
+
+coverage:
+  threshold: 80
+
+gitlab:
+  cacheDir: .codigate/cache
+
+ai:
+  apiBase: https://aifa-chatbot.dev.dotin.ir/v1
+  apiKey: ""
+  model: assistance-model
+
+rules:
+  seo.missing-meta-description:
+    enabled: true
+    severity: medium
+
+gate:
+  securityMin: 80
+  overallMin: 75
+  highMax: 5
+  testsMin: 50

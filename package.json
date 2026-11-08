@@ -6,13 +6,14 @@
     "dev": "nx run-many -t build --watch",
     "build": "nx run-many -t build",
     "build:server": "nx build mcp-server",
-    "start": "node dist/apps/mcp-server/main.js",
+    "start": "node apps/mcp-server/dist/main.js",
+    "codigate": "node apps/cli/dist/main.js",
     "serve": "nx serve mcp-server",
     "graph": "nx graph",
     "lint": "nx run-many -t lint",
     "format": "nx format:write",
     "format:check": "nx format:check",
-    "test": "nx run-many -t test",
+    "test": "vitest run",
     "clean": "rm -rf dist node_modules/.cache"
   },
   "private": true,
@@ -27,6 +28,7 @@
     "@swc/core": "1.15.8",
     "@swc/helpers": "0.5.18",
     "@types/node": "^24.0.0",
+    "@types/vscode": "^1.125.0",
     "esbuild": "^0.27.0",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
@@ -35,11 +37,11 @@
     "prettier": "^3.8.1",
     "tslib": "^2.3.0",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.58.0"
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^3.2.7"
   },
   "workspaces": [
     "packages/*",
     "apps/*"
-  ],
-  "dependencies": {}
+  ]
 }

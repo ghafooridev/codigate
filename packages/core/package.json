@@ -15,6 +15,9 @@
     }
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "@codigate/application": "*",
+    "@codigate/domain": "*",
+    "tslib": "^2.3.0",
+    "yaml": "^2.9.0"
   }
 }
